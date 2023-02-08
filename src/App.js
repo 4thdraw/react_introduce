@@ -6,6 +6,7 @@ import 'swiper/css/scrollbar';
 import Header from './component/Hd';
 import Worksswiper from './component/Swiper';
 import Preinterview from './component/Preinterview'
+import Contact from './component/Contact';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Worksswiper></Worksswiper>      
       <Preinterview contentid="me" objnm="noticeObj"  title="공지사항" ></Preinterview>
       <Preinterview contentid="preInterview" objnm="preinterview"   title="사전인터뷰" ></Preinterview>
+      <Contact></Contact>
       <Footer></Footer>
     </div>
   );
