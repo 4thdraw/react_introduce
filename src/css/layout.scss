@@ -65,6 +65,35 @@ li{
         #allMenu{
             font-weight: 500;
         }
+
+        .mobileNavi{
+            position: absolute;
+            top: calc(100% + 1px);
+            left:0;
+            right:0;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition:  max-height 0.5s ease-out;
+
+            a{
+                color:black !important
+            }
+
+            &:before,
+            &:after{
+                content: "";
+                display: block;
+                height: 1rem;
+
+            }
+
+            &.on{
+                max-height: calc(100vh - 50px); 
+                
+            }
+
+        }
         
     }
     .workSection{
