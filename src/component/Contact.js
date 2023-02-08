@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Select from "react-select";
 import { useForm , Controller} from "react-hook-form";
-import { TextField, Checkbox, FormControlLabel, RadioGroup, Radio } from "@material-ui/core";
+import { Checkbox, FormControlLabel, RadioGroup, Radio } from "@material-ui/core";
 
 
 
@@ -11,17 +11,22 @@ function Contact(props) {
   const styleValue = ['html_css','jQuery','ECMA6','react','node','php'];
   const radioValue = ['파트타임','하루종일','딱 8시간'];
 
-  const { register, handleSubmit, control, watch, formState: { errors } } = useForm({
+  const { register, handleSubmit, control, formState: { errors } } = useForm({
     defaultValues: {
-      firstName: '',
-      select: {}
+      company: '',
+      email: '',
+      gender: '',
+      age : '',
+      ability: [],      
+      worktime: radioValue[0]
     }
-  });
+  })
+
   
-  const onSubmit = (data) =>  { 
-    console.log(data);
- }
-  console.log(watch("example")); // watch input value by passing the name of it
+  const onSubmit = (data) => {
+    alert(JSON.stringify(data));
+  };
+
 
 
   return (
@@ -41,7 +46,7 @@ function Contact(props) {
                                     required: true,
                                     message: "회사명은 필수 입력입니다.",
                                     }) } />
-                            {errors.company && <p role="alert">{errors.company.message}</p>}
+                            {errors.company && <p role="alert">회사명 필수임</p>}
                         </li>
                         <li>
                             <span>이메일</span><input {...register("email" ,  {
@@ -65,6 +70,9 @@ function Contact(props) {
                         <li>
                            <span>수치넣기</span> 
                            <input type="number" {...register("age", { min: 18, max: 99 })} />
+                           {errors.age && (
+          <p>You Must be older then 18 and younger then 99 years old</p>
+        )}
                         </li>
                         <li>
                         <Controller
@@ -86,8 +94,8 @@ function Contact(props) {
                                     return(
                                         <FormControlLabel
                                             control={
-                                                <Checkbox
-                                                    name={ 'ability'+idx }
+                                                <Checkbox                                                    
+                                                    {...register('ability') }
                                                     value={item}
                                                 />
                                             }
@@ -100,39 +108,25 @@ function Contact(props) {
                         
                         </li>
                         <li>
-                        <RadioGroup                           
-                          defaultValue={radioValue[0]}
-                          name="worktime"
+                        <RadioGroup                          
                           className='flex-md-row '
                         >
-
                            {
                                 radioValue.map(( item, idx ) =>{
-                                    return(
-                                        
-                                     <FormControlLabel value={item} control={<Radio />} label={item} />
-   
-
+                                    return(                                        
+                                     <FormControlLabel value={item} {...register('worktime') }  control={<Radio />} label={item} />
                                     )
 
                                 })
                             }
                               </RadioGroup>
-
-                       
                         </li>
                     </ul>                    
                     <input type="submit" />
                 </form>
             </div>
         </div>
-
-        
-        
-
-    </section>
-   
-    
+    </section>    
   );
   
 }
