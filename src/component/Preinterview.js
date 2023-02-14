@@ -5,7 +5,9 @@ import axios from 'axios';
 
 
 const Preinterview = (props) => {
-  const [faqlist, setfaqlist] = useState(null);
+
+  const [faqlist, setfaqlist] = useState(null); // 비동기통신 useState의 null인 이유
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
     
@@ -49,18 +51,19 @@ const Preinterview = (props) => {
                                     <div className="py-5 container-md text-start">
                                       <ul>
                                         {
-                                          console.log(faqlist)
-                                          // interviewjson.map(function(value, index){
-                                          //     //this조심할것
-                                          //     return(
-                                          //       <li  key={'interview'+index}>
-                                          //         <strong className='d-block border-bottom py-2 ' role="button" onClick={ e => { console.log( e.target.nextSibling.classList.toggle('d-none') ) }}>{value.subject}</strong>
-                                          //         <p className='py-5 d-none'>{value.content}</p>
-                                          //       </li>
-                                          //     )
-                                          // }
-                                          // )
-                                        }
+                                        //console.log(faqlist, Array.isArray(faqlist))
+                                           faqlist && faqlist.map(function(value, index){
+                                         
+                                              return(
+                                               
+                                                <li  key={'interview'+index}>
+                                                   <strong className='d-block border-bottom py-2 ' role="button" onClick={ e => { console.log( e.target.nextSibling.classList.toggle('d-none') ) }}>{value.subject}</strong>
+                                                   <p className='py-5 d-none'>{value.content}</p>
+                                                 </li>
+                                              )
+                                          }
+                                          )
+                                         }
                                       </ul>
                                     </div>
                                   </div>
